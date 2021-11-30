@@ -15,5 +15,5 @@ Related project:
 1. In xNav's memo feild, Customer send key value back with his own wallet to wallet of [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend).
 1. Wallet of [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend) receive xNav with correct key of selected room, and comfirm this transaction.
 1. Navinn website shows this booking transaction is comfirmed
-1. Customer arrive hotel, and then use room key to get a room
+1. Customer arrive hotel, and go get a room with room key.
 
