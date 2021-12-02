@@ -46,6 +46,9 @@ export default defineComponent({
     margin-left:10px;
     margin-right:25px;
 }
+.search-block > .search-room-key > .far{
+    width:20px;
+}
 .search-block{
     border:2px solid #000;
     border-radius: 10px;
