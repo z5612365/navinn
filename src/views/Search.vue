@@ -1,20 +1,23 @@
 <template>
   <div class="search">
     <p>Room key: </p>
-    <form method="post" class="search-block">
+    <div class="search-block">
       <div class="search-room-key">
         <input v-bind:type="passwordFieldType" name="password" required="" id="id_password">
         <i class="far" v-bind:class="eyeClass" id="togglePassword" style="margin-left: -30px; cursor: pointer;" @click="switchVisibility"></i>
       </div>
-      <button type="submit" class="btn btn-primary fas fa-search"></button>
-    </form>
+      <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"></button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, DefineComponent } from "vue";
+import { defineComponent, ref, DefineComponent, inject } from "vue";
+import axios from "axios";
 export default defineComponent({
   setup() {
+
+    const dblocation = inject("dblocation");
 
     //var password = ref("");
     var passwordFieldType = ref("password");
@@ -26,7 +29,22 @@ export default defineComponent({
         console.log(passwordFieldType.value);
         console.log(eyeClass.value);
     };
-    return { passwordFieldType, switchVisibility, eyeClass };
+
+    const getRoomInfo = () => {
+        axios
+          .post(dblocation + "customer/queryWithCustomerId", {
+            //requestBody: { actionInfo: null, requestItem: searchContent },
+          })
+          .then((response) => {
+            console.log("yes");
+          //   CustomerName.value =response.data.resultBody.responseResult.customerName;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+    };
+
+    return { passwordFieldType, switchVisibility, eyeClass, getRoomInfo };
   },
 });
 </script>
