@@ -1,5 +1,7 @@
 <template>
   <div class="search">
+
+    <DatePicker></DatePicker>
     <p>Room key: </p>
     <div class="search-block">
       <div class="search-room-key">
@@ -8,13 +10,20 @@
       </div>
       <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"></button>
     </div>
+  
+
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, DefineComponent, inject } from "vue";
 import axios from "axios";
+import DatePicker from '@/components/DatePicker.vue';
 export default defineComponent({
+  components: {
+  DatePicker
+  
+  },
   setup() {
 
     const dblocation = inject("dblocation");
