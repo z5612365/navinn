@@ -12,38 +12,20 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        pickerOptions: {
-          shortcuts: [{
-            text: 'Last week',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last month',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
-              picker.$emit('pick', [start, end]);
-            }
-          }, {
-            text: 'Last 3 months',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date();
-              start.setTime(start.getTime() - 3600 * 1000 * 24 * 90);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value1: ''
-      };
-    }
-  };
+import { defineComponent, reactive } from "vue";
+
+// export default defineComponent({
+//   setup() {
+//     var value1=reactive( Date());
+//     return {value1};
+//   },
+// });
+
+export default {
+  data() {
+    return {
+      value1: ''
+    };
+  }
+};
 </script>
