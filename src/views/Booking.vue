@@ -11,9 +11,10 @@
 
     </pre>
     <DatePicker></DatePicker>
-    <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"></button>
+    <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"><font-awesome-icon :icon="['fa', 'search']" /></button>
 
     <PaymentSeqComp :isShow="isShow" :paymentSeq="paymentSeq" ></PaymentSeqComp>
+
   </div>
 </template>
 
@@ -29,15 +30,21 @@ export default defineComponent({
   },
   setup() {
     var isShow = ref(false);
-    var paymentSeq = ref("Default error message!");
+    var paymentSeq = ref("");
     const showAlertDialog = (flag:boolean, msg:string) => {
       isShow.value = flag;
       paymentSeq.value = msg;
     }
     const getRoomInfo = () => {
-      paymentSeq.value='123';
+      paymentSeq.value=getRandomInt(0, 10000).toString(10).padStart(4, "0");
       showAlertDialog(true, paymentSeq.value);
     };
+    const getRandomInt = (min: number, max: number) => {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
     return { isShow, paymentSeq, showAlertDialog, getRoomInfo };
   },
 });

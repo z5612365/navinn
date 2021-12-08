@@ -4,9 +4,10 @@
     <div class="search-block">
       <div class="search-room-key">
         <input v-bind:type="passwordFieldType" name="password" required="" id="id_password">
-        <i class="far" v-bind:class="eyeClass" id="togglePassword" style="margin-left: -30px; cursor: pointer;" @click="switchVisibility"></i>
+        <i v-if="eyeClass" id="togglePassword" style="margin-left: -30px; cursor: pointer;" @click="switchVisibility"><font-awesome-icon :icon="['fa', 'eye']" /></i>
+        <i v-if="!eyeClass" id="togglePassword" style="margin-left: -30px; cursor: pointer;" @click="switchVisibility"><font-awesome-icon :icon="['fa', 'eye-slash']" /></i>
       </div>
-      <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"></button>
+      <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"><font-awesome-icon :icon="['fa', 'search']" /></button>
     </div>
     </div>
 </template>
@@ -25,11 +26,11 @@ export default defineComponent({
 
     //var password = ref("");
     var passwordFieldType = ref("password");
-    var eyeClass = ref("fa-eye-slash");
+    var eyeClass = ref(false);
     
     const switchVisibility = () => {
         passwordFieldType.value = passwordFieldType.value === "password" ? "text" : "password";
-        eyeClass.value = eyeClass.value === "fa-eye-slash" ? "fa-eye" : "fa-eye-slash";
+        eyeClass.value = eyeClass.value === false ? true : false;
         console.log(passwordFieldType.value);
         console.log(eyeClass.value);
     };
@@ -54,7 +55,6 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css";
 .search-block > .search-room-key > input{
     //border:none;
     border-top-width:0px;
@@ -68,8 +68,8 @@ export default defineComponent({
     margin-left:10px;
     margin-right:25px;
 }
-.search-block > .search-room-key > .far{
-    width:20px;
+.search-block > .search-room-key > i > font-awesome-icon {
+    width:30px;
 }
 .search-block{
     border:2px solid #000;
