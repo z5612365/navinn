@@ -1,45 +1,33 @@
 <template>
   <div class="footer">
     <div class="contact">
-        Tel: +886 00000000
-        <br/>
-        Addr: Taiwan(ROC)
+      Tel: +886 00000000
+      <br />
+      Addr: Taiwan(ROC)
     </div>
     <div class="social">
-        facebook
-        <br/>
-        line
+      <font-awesome-icon :icon="{ prefix: 'fab', iconName: 'facebook' }" />
+      <br />
+      line
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-
-@Options({
-  props: {
-    msg: String
-  }
-})
-export default class HelloWorld extends Vue {
-  msg!: string
-}
-</script>
+<script lang="ts"></script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-.footer{
-    display: flex;
-    background: black;
-    padding: 20px;
+.footer {
+  display: flex;
+  background: black;
+  padding: 20px;
 }
-.contact{
-    background: gray;
-    margin: 20px;
+.contact {
+  color: rgb(207, 207, 207);
+  margin: 20px;
 }
-.social{
-    background: gray;
-    margin: 20px;
+.social {
+  color: rgb(207, 207, 207);
+  margin: 20px;
 }
-
 </style>
