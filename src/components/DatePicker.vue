@@ -2,30 +2,38 @@
   <div class="block">
     <span class="demonstration">Choose Date: </span>
     <el-date-picker
-      v-model="value1"
+      v-model="dates"
       type="daterange"
       range-separator="To"
       start-placeholder="Start date"
-      end-placeholder="End date">
+      end-placeholder="End date"
+      value-format="YYYY-MM-DD"
+      @change="emitOutside"
+    >
     </el-date-picker>
   </div>
 </template>
 
 <script>
-import { defineComponent, reactive } from "vue";
+import { defineComponent, reactive, ref, watch } from "vue";
 
-// export default defineComponent({
-//   setup() {
-//     var value1=reactive( Date());
-//     return {value1};
-//   },
-// });
+export default defineComponent({
+  setup(props, { emit }) {
+    const dates = ref();
 
-export default {
-  data() {
-    return {
-      value1: ''
+    console.log(dates);
+    watch(dates, (newValue, oldValue) => {
+      console.log("Prop changed: ", newValue, " | was: ", oldValue);
+      
+    });
+
+    const emitOutside = () => {
+      emit("emitOutside", dates.value);
     };
-  }
-};
+
+
+    return { dates, emitOutside };
+  },
+});
+
 </script>
