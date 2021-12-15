@@ -17,3 +17,5 @@ Related project:
 1. Navinn website shows this booking transaction is comfirmed
 1. Customer arrive hotel, and go get a room with room key.
 
+## ERD
+<img src="./erd/navinn.png" alt="drawing" width="550"/>

@@ -1,54 +1,133 @@
 <template>
-  <div class="booking">
-    <h1>This is an booking page</h1>
-    <pre>
-    room name
-    room pic
-    available room
-    date
-    room key(please send xNav to wallet xxxxxxxxxxx, memo is key)
-    room price(please send Nav to wallet xxxxxxxxxxx, amount is price)
+  <div class="main-container">
+    <div class="portfolio">
 
-    </pre>
-    <DatePicker></DatePicker>
-    <button type="submit" class="btn btn-primary fas fa-search" @click="getRoomInfo"><font-awesome-icon :icon="['fa', 'search']" /></button>
-
-    <PaymentSeqComp :isShow="isShow" :paymentSeq="paymentSeq" ></PaymentSeqComp>
-
+      <!-- TODO v-for photo collection -->
+      <div class="flex-container">
+        <div class="image-container" v-for="image in images" :key="image">
+          <div class="image-container-inside" @click="goBookingDetailPage(image.roomSeq)">
+            <span>{{ image.roomDesc }}<br>Price: {{ image.roomPrice }}</span>
+            <img :src="image.roomUrl" :alt="image.roomAlt"  />
+          </div>
+        </div>
+      </div>
+    </div>
+    <Footer />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, DefineComponent, inject } from "vue";
-import axios from "axios";
-import DatePicker from '@/components/DatePicker.vue';
-import PaymentSeqComp from '@/components/PaymentSeqComp.vue';
+import { defineComponent, ref, getCurrentInstance } from "vue";
+import Footer from "@/components/Footer.vue";
+import router from "@/router/index.ts";
+import axios from "axios"
+
 export default defineComponent({
   components: {
-    DatePicker,
-    PaymentSeqComp,
+    Footer,
   },
   setup() {
-    var isShow = ref(false);
-    var paymentSeq = ref("");
-    const showAlertDialog = (flag:boolean, msg:string) => {
-      isShow.value = flag;
-      paymentSeq.value = msg;
-    }
-    const getRoomInfo = () => {
-      paymentSeq.value=getRandomInt(0, 10000).toString(10).padStart(4, "0");
-      showAlertDialog(true, paymentSeq.value);
-    };
-    const getRandomInt = (min: number, max: number) => {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-    }
+    const images = ref();
+    axios
+      .post('http://localhost:8081/getRoomInfo')
+      .then(function (response) {
+        console.log(response.data);
+        images.value=response.data
+      })
+      .catch(function (error) {
+        console.log(error);
+    });
 
-    return { isShow, paymentSeq, showAlertDialog, getRoomInfo };
+    const goBookingDetailPage = (roomSeq: string) => {
+      console.log(roomSeq);
+      router.push({ name: 'BookingDetail', params: { roomId: roomSeq }});
+    };
+
+    const internalInstance = getCurrentInstance();
+    const loader =
+      internalInstance != null
+        ? internalInstance.appContext.config.globalProperties.$loading.show({})
+        : null;
+    loader.hide();
+
+    return {
+      images,
+      goBookingDetailPage,
+    };
   },
 });
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+.main-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.main-container .portfolio {
+  flex: 1;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+.flex-container > .image-container {
+  overflow: hidden;
+  width: 500px;
+  height: 500px;
+  margin: 15px;
+  background-color: blue;
+  outline: 2px solid white;
+  outline-offset: -30px;
+}
+
+.flex-container > .image-container > .image-container-inside {
+  position: relative;
+  overflow: hidden;
+  width: inherit;
+  height: inherit;
+  transition: all 0.4s ease-out;
+  opacity: 0.88;
+}
+
+.flex-container > .image-container > .image-container-inside > img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: inherit;
+  width: inherit;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.flex-container > .image-container > .image-container-inside:hover {
+  backface-visibility: hidden;
+  transform: scale(1.15, 1.15);
+  opacity: 1;
+}
+
+.flex-container > .image-container > .image-container-inside:hover span {
+  opacity: 0;
+}
+
+.flex-container > .image-container > .image-container-inside > span {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  margin: 0 130px;
+  left: 0;
+  right: 0;
+  top: calc(250px - 10px);
+  z-index: 2;
+  transition: all 0.3s ease-out;
+  cursor: pointer;
+}
 </style>
