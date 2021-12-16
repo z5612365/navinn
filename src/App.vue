@@ -13,6 +13,7 @@
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Caveat:wght@700&display=swap");
+@import "scss/vue-loading.css";
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
