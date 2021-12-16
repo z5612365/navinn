@@ -32,7 +32,7 @@ Navinn is a website for online booking, which is safe, anonymous and untraceable
 1. Short-term goal is for minimum viable product(MVP) demo.
 1. Long-term goal is to combine hotel property management systems(PMS) to provide integrated service.
 
-### ERD
+### Activity Diagram
 <img src="./erd/navinn.png" alt="drawing" width="550"/>
 
 * Short-term goal:
@@ -46,6 +46,9 @@ Navinn is a website for online booking, which is safe, anonymous and untraceable
   * [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend): For hotel holder to manage room.
   * [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend): Api for [navinn](https://github.com/z5612365/navinn) and [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend) 
   * Database(MariaDB): Store txn, room and booking data
+
+### Frameworks Usage
+<img src="./erd/navinn-tech.png" alt="drawing" width="550"/>
 
 ## Booking instruction
 1. Customer select room to book.
