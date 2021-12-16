@@ -9,6 +9,21 @@ Navinn is a website for online booking, which is safe, anonymous and untraceable
 <!---
 * [navinn-wallet](https://github.com/z5612365/navinn-wallet): Simple wallet for send xNav
 -->
+
+
+## Install
+* Run [navinn](https://github.com/z5612365/navinn)
+
+        npm i
+        npm run serve
+
+* Create dataBase schema and insert initial data
+* Run [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend)
+
+        Run Spring with Maven
+
+
+
 ## Goals to achieve
 
 1. Short-term goal is for minimum viable product(MVP) demo.
