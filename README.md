@@ -1,14 +1,32 @@
 # navinn
 This project is for navcoin hackathon 2021, and developing with [navcoin-js](https://github.com/aguycalled/navcoin-js)
+
 Navinn is a website for online booking, which is safe, anonymous and untraceable.
 
 ## Related project:
-* [navinn](https://github.com/z5612365/navinn)
 * [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend): Hotel Property Management System (backend)
 * [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend): Hotel Property Management System (frontend), and it embeds a wallet([navinn-wallet](https://github.com/z5612365/navinn-wallet)) for receiving xNav
 <!---
 * [navinn-wallet](https://github.com/z5612365/navinn-wallet): Simple wallet for send xNav
 -->
+
+
+## Install
+* Git clone [navinn](https://github.com/z5612365/navinn)
+* Run [navinn](https://github.com/z5612365/navinn)
+
+        npm i
+        npm run serve
+
+* Git clone [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend)
+* Install MariaDB
+* Create DB user and DB(navinndb)
+* Change [navinn-pms-backend DB setting](https://github.com/z5612365/navinn-pms-backend/blob/master/navinn-ap/navinn-ap-customer-gl/src/main/resources/application.properties)
+* Create dataBase schema and insert initial data(DDL and initial data is in [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend) db folder)
+* Run [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend)
+
+        Run Spring with Maven
+        
 ## Goals to achieve
 
 1. Short-term goal is for minimum viable product(MVP) demo.
