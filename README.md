@@ -1,5 +1,6 @@
 # navinn
 This project is for navcoin hackathon 2021, and developing with [navcoin-js](https://github.com/aguycalled/navcoin-js)
+
 Navinn is a website for online booking, which is safe, anonymous and untraceable.
 
 ## Related project:
