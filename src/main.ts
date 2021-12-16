@@ -13,7 +13,7 @@ import { faSearch, faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueLoading from "vue-loading-overlay";
-import "vue-loading-overlay/dist/vue-loading.css";
+//import "vue-loading-overlay/dist/vue-loading.css";
 
 let loader: any = null;
 function hideLoader() {
