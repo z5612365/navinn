@@ -4,7 +4,6 @@ This project is for navcoin hackathon 2021, and developing with [navcoin-js](htt
 Navinn is a website for online booking, which is safe, anonymous and untraceable.
 
 ## Related project:
-* [navinn](https://github.com/z5612365/navinn)
 * [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend): Hotel Property Management System (backend)
 * [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend): Hotel Property Management System (frontend), and it embeds a wallet([navinn-wallet](https://github.com/z5612365/navinn-wallet)) for receiving xNav
 <!---
