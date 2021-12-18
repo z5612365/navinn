@@ -6,7 +6,7 @@
       <div class="flex-container">
         <div class="image-container" v-for="image in images" :key="image">
           <div class="image-container-inside" @click="goBookingDetailPage(image.roomSeq)">
-            <span>{{ image.roomDesc }}<br>Price: {{ image.roomPrice }}</span>
+            <span>{{ image.roomDesc }}<br>Price: {{ image.roomPrice }} xNav</span>
             <img :src="image.roomUrl" :alt="image.roomAlt"  />
           </div>
         </div>

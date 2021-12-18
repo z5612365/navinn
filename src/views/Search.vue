@@ -1,14 +1,21 @@
 <template>
   <div class="main-container">
     <div class="search">
-      <passwordTextToggleComp></passwordTextToggleComp>
+      <passwordTextToggleComp
+        @emitOutside="syncDateValue"
+      ></passwordTextToggleComp>
       <tableComp
-        :roomSeq="roomSeq"
-        :paymentSeq="paymentSeq"
-        :room="room"
+        :roomName="roomName"
         :roomPrice="roomPrice"
-        :roomStatus="roomStatus"
+        :bookStartDate="bookStartDate"
+        :bookEndDate="bookEndDate"
+        :paymentKey="paymentKey"
+        :receiveWallet="receiveWallet"
+        :totalAmount="totalAmount"
+        :status="status"
+        :cumulativePaymentAmount="cumulativePaymentAmount"
       ></tableComp>
+      <!--
       <button
         type="submit"
         class="btn btn-primary fas fa-search"
@@ -23,8 +30,9 @@
       >
         <font-awesome-icon :icon="['fa', 'search']" />getHistory
       </button>
+      -->
     </div>
-    <Footer/>
+    <Footer />
   </div>
 </template>
 
@@ -38,13 +46,10 @@ import {
 } from "vue";
 import axios from "axios";
 import passwordTextToggleComp from "@/components/PasswordTextToggleComp.vue";
-import {
-  checkPaymentStatus,
-  getBalance,
-  getHistory,
-} from "@/utils/checkStatus";
+import { getBalance, getHistory } from "@/utils/checkStatus";
 import tableComp from "@/components/TableComp.vue";
 import Footer from "@/components/Footer.vue";
+import { getCumulativePaymentAmountByPaymentKey } from "@/utils/syncPayment";
 
 export default defineComponent({
   components: {
@@ -54,30 +59,16 @@ export default defineComponent({
   },
   setup() {
     const internalInstance = getCurrentInstance();
-    
-    var roomSeq = ref("99999");
-    var paymentSeq = ref("123456789");
-    var room = ref("Fancy");
-    var roomPrice = ref("1000");
-    var roomStatus = ref("");
 
-    if (internalInstance != null) {
-      // roomStatus = ref(checkPaymentStatus(internalInstance.appContext.config.globalProperties.$wallet
-      // ,"0000"));
-
-      checkPaymentStatus(
-        internalInstance.appContext.config.globalProperties.$wallet,
-        "0000"
-      )
-        .then((success) => {
-          roomStatus.value = success;
-          console.log(success);
-        })
-        .catch((fail) => {
-          console.log(fail);
-        });
-    }
-
+    var roomName = ref("");
+    var roomPrice = ref("");
+    var bookStartDate = ref("");
+    var bookEndDate = ref("");
+    var paymentKey = ref("");
+    var receiveWallet = ref("");
+    var totalAmount = ref();
+    var cumulativePaymentAmount = ref();
+    var status = ref("");
     console.log("internalInstance " + internalInstance);
 
     const getBalanceClick = () => {
@@ -110,15 +101,59 @@ export default defineComponent({
           });
       }
     };
-
+    const syncDateValue = (bookingInfoDo: any) => {
+      if (internalInstance != null) {
+        const history = getHistory(
+          internalInstance.appContext.config.globalProperties.$wallet
+        )
+          .then((success) => {
+            //console.log(success);
+            const historyJson = JSON.parse(success);
+            getCumulativePaymentAmountByPaymentKey(
+              internalInstance.appContext.config.globalProperties.$wallet,
+              historyJson,
+              paymentKey.value
+            )
+              .then((success) => {
+                cumulativePaymentAmount.value = success;
+                if (
+                  status.value === "UNPAID" &&
+                  cumulativePaymentAmount.value >= totalAmount.value
+                ) {
+                  status.value = "PAID";
+                }
+              })
+              .catch((fail) => {
+                console.log(fail);
+              });
+          })
+          .catch((fail) => {
+            console.log(fail);
+          });
+      }
+      //console.log("bookingInfoDo "+bookingInfoDo.toString);
+      roomName.value = bookingInfoDo.roomName;
+      roomPrice.value = bookingInfoDo.roomPrice;
+      bookStartDate.value = bookingInfoDo.bookStartDate;
+      bookEndDate.value = bookingInfoDo.bookEndDate;
+      paymentKey.value = bookingInfoDo.paymentKey;
+      receiveWallet.value = bookingInfoDo.receiveWallet;
+      totalAmount.value = bookingInfoDo.totalAmount;
+      status.value = bookingInfoDo.status;
+    };
     return {
       getBalanceClick,
       getHistoryClick,
-      roomSeq,
-      paymentSeq,
-      room,
+      syncDateValue,
+      roomName,
       roomPrice,
-      roomStatus,
+      bookStartDate,
+      bookEndDate,
+      paymentKey,
+      receiveWallet,
+      totalAmount,
+      status,
+      cumulativePaymentAmount,
     };
   },
 });

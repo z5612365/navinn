@@ -55,6 +55,7 @@ export default defineComponent({
 .main-container .about pre {
   //font-family: 'Abel', sans-serif;
   font-family: "Caveat", cursive;
+  //font-family: 'Life Savers', cursive;
   display: flex;
   justify-content: center;
   text-align: left;

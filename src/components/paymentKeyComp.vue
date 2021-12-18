@@ -1,6 +1,6 @@
 <template>
   <div v-if="isShow" class="paymentKeyComp">
-    <p>Payment key is: {{ paymentKey }}</p>
+    <p>Payment key: {{ paymentKey }}</p>
   </div>
 </template>
 
