@@ -3,7 +3,10 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/about">About</router-link> |
     <router-link to="/booking">Booking</router-link> |
-    <router-link to="/search">Search</router-link>
+    <router-link to="/search">Search</router-link> |
+    <router-link to="/history">History</router-link> |
+    <router-link to="/instruction">Instruction</router-link>
+
     <!--
     <router-link to="/booking/${roomId}">Booking</router-link>
     -->
@@ -12,7 +15,7 @@
 </template>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Caveat:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Abel&family=Bebas+Neue&family=Caveat:wght@700&display=swap&family=Life+Savers:wght@700");
 @import "scss/vue-loading.css";
 
 #app {

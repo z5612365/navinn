@@ -2,23 +2,15 @@
   <div class="main-container">
     <div class="booking">
       <pre>
-
-        Room Name: {{room.roomName}}
-        Room Desc: {{room.roomDesc}}
-        Room Price: {{room.roomPrice}}
-        Room Spec: {{room.roomSpec}}
-<!--
-      room name
-      room pic
-      available room
-      date
-      room key(please send xNav to wallet xxxxxxxxxxx, memo is key)
-      room price(please send Nav to wallet xxxxxxxxxxx, amount is price)
-      -->
-      </pre>
+Room Name: {{ room.roomName }}
+Room Desc: {{ room.roomDesc }}
+Room Price(xNav): {{ room.roomPrice }}
+Room Spec: {{ room.roomSpec }}</pre
+      >
+      <pre class="reminder">Reminder: Please remember your [Payment Key]</pre>
 
       <div class="picker">
-        <DatePicker @emitOutside="syncDateValue"></DatePicker>
+        <DatePicker @emitOutside="syncDateValue" :roomSeq="roomId"></DatePicker>
         <button
           type="submit"
           class="btn btn-primary fas fa-search"
@@ -62,7 +54,6 @@ export default defineComponent({
   setup() {
     const route = useRoute();
     var roomId = route.params.roomId;
-
     const room = ref({ roomUrl: "", roomAlt: "" });
     axios
       .post("http://localhost:8081/getRoomInfoByRoomSeq?roomSeq=" + roomId)
@@ -89,14 +80,16 @@ export default defineComponent({
       //paymentKey.value = getRandomInt(0, 10000).toString(10).padStart(4, "0");
       axios
         .post(
-          "http://localhost:8081/booking?roomSeq=1&bookingStartDate=" +
+          "http://localhost:8081/booking?roomSeq=" +
+            roomId +
+            "&bookingStartDate=" +
             bookingStartDate.value +
             "&bookingEndDate=" +
             bookingEndDate.value
         )
         .then(function (response) {
           console.log(response.data);
-          paymentKey.value = response.data;
+          paymentKey.value = String(response.data).padStart(4, "0");
           isShow.value = true;
         })
         .catch(function (error) {
@@ -129,5 +122,15 @@ export default defineComponent({
 }
 .main-container .booking {
   flex: 1;
+}
+.main-container .booking img {
+  padding: 60px;
+}
+.main-container .reminder {
+  color: red;
+}
+
+.main-container .booking .picker button {
+  margin: 15px;
 }
 </style>
