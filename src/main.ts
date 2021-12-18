@@ -9,7 +9,7 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faEyeSlash, faEye } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faEyeSlash, faEye, faSync } from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueLoading from "vue-loading-overlay";
@@ -54,7 +54,7 @@ router.beforeEach((to, from, next) => {
 
 import { loadWallet, getBalance } from "@/utils/checkStatus";
 
-library.add(faSearch, faEyeSlash, faEye, faFacebook);
+library.add(faSearch, faEyeSlash, faEye, faFacebook, faSync);
 
 interface IWalletHistory {
   wallettxid: string;
