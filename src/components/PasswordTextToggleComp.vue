@@ -65,19 +65,22 @@ export default defineComponent({
     };
 
     const getRoomInfo = () => {
-      axios
-        //.post(dblocation + "customer/queryWithCustomerId", {
-        .post(
-          "http://localhost:8081/getBookingInfoByPaymentKey?paymentKey=" +
-            paymentKey.value
-        )
-        .then((response) => {
-          console.log("response.data " + response.data);
-          emit("emitOutside", response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (internalInstance != null) {
+        axios
+          //.post(dblocation + "customer/queryWithCustomerId", {
+          .post(
+            internalInstance.appContext.config.globalProperties.$postUrl +
+              "/getBookingInfoByPaymentKey?paymentKey=" +
+              paymentKey.value
+          )
+          .then((response) => {
+            console.log("response.data " + response.data);
+            emit("emitOutside", response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     };
 
     return {

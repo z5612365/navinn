@@ -38,6 +38,7 @@ import {
   inject,
   onBeforeMount,
   computed,
+  getCurrentInstance,
 } from "vue";
 import axios from "axios";
 import DatePicker from "@/components/DatePicker.vue";
@@ -55,16 +56,23 @@ export default defineComponent({
     const route = useRoute();
     var roomId = route.params.roomId;
     const room = ref({ roomUrl: "", roomAlt: "" });
-    axios
-      .post("http://localhost:8081/getRoomInfoByRoomSeq?roomSeq=" + roomId)
-      .then(function (response) {
-        console.log(response.data);
-        room.value = response.data;
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    const internalInstance = getCurrentInstance();
 
+    if (internalInstance != null) {
+      axios
+        .post(
+          internalInstance.appContext.config.globalProperties.$postUrl +
+            "/getRoomInfoByRoomSeq?roomSeq=" +
+            roomId
+        )
+        .then(function (response) {
+          console.log(response.data);
+          room.value = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
     var bookingStartDate = ref("");
     var bookingEndDate = ref("");
 
@@ -77,24 +85,27 @@ export default defineComponent({
     var paymentKey = ref("");
 
     const booking = () => {
-      //paymentKey.value = getRandomInt(0, 10000).toString(10).padStart(4, "0");
-      axios
-        .post(
-          "http://localhost:8081/booking?roomSeq=" +
-            roomId +
-            "&bookingStartDate=" +
-            bookingStartDate.value +
-            "&bookingEndDate=" +
-            bookingEndDate.value
-        )
-        .then(function (response) {
-          console.log(response.data);
-          paymentKey.value = String(response.data).padStart(4, "0");
-          isShow.value = true;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      if (internalInstance != null) {
+        //paymentKey.value = getRandomInt(0, 10000).toString(10).padStart(4, "0");
+        axios
+          .post(
+            internalInstance.appContext.config.globalProperties.$postUrl +
+              "/booking?roomSeq=" +
+              roomId +
+              "&bookingStartDate=" +
+              bookingStartDate.value +
+              "&bookingEndDate=" +
+              bookingEndDate.value
+          )
+          .then(function (response) {
+            console.log(response.data);
+            paymentKey.value = String(response.data).padStart(4, "0");
+            isShow.value = true;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     };
     const getRandomInt = (min: number, max: number) => {
       min = Math.ceil(min);
