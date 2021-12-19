@@ -2,14 +2,25 @@
   <div class="main-container">
     <div class="instruction">
       <pre>
+Customer should remember their [Payment Key].
+It's the key for customer payment, and is your room key when you want to access in yor room.
+
 Instruction:
-1. Booking in Booking page
-2. Remember your [Payment Key]
-3. Go to Search page, search with [Payment Key]
-4. Check all booking info is correct, the booking status would be "UNPAID"
-5. Go to your personal xNav wallet
-6. Pay [Total Amount] xNav to [Receive Wallet], and input [Payment Key] to the txn memo field
-7. Go back to Search page, and the booking status would be "PAID"</pre
+
+    BOOK:
+        1. [navinn > Booking page]: Booking it! (Book date will not avialable to pick if another booked earlier)
+        2. [navinn > Booking page]: Remember your [Payment Key]
+        3. [navinn > Search page]: Search with [Payment Key] for payment details
+        4. [navinn > Search page]: Check all booking info is correct, the booking status would be "UNPAID"
+        5. [navinn > History page]: (Optional)Press refresh button, get hotel's all booking info
+
+    PAY:
+        1. [navinn-wallet(just for test)/or your personal xNav wallet that can create txn with memo]
+        2. [navinn-wallet(just for test)]: Input paymentKey xNavAmount
+            [navinn-wallet > paymentKey]: [navinn > Search page > Total Amount]
+            [navinn-wallet > xNavAmount]: [[navinn > Search page > Receive Wallet])
+        3. [navinn > Search page]: Back to Search page or History page
+            , and search again, booking status would be "PAID"</pre
       >
     </div>
     <Footer />
@@ -40,13 +51,13 @@ export default defineComponent({
 
 .main-container .instruction pre {
   //font-family: 'Abel', sans-serif;
-  font-family: "Life Savers", cursive;
+  //font-family: "Life Savers", cursive;
   display: flex;
   justify-content: center;
   text-align: left;
   white-space: pre-wrap;
   word-wrap: break-word;
-  font-size: 25px;
+  font-size: 16px;
   color: rgb(59, 52, 28);
   padding: 50px;
 }
