@@ -4,6 +4,8 @@ This project is for navcoin hackathon 2021, and developing with [navcoin-js](htt
 Navinn is a website for online booking, which is safe, anonymous and untraceable.
 
 ## Demo
+    Navinn: https://139.162.98.187:8080/
+    Navinn-Wallet: https://139.162.98.187:8082/
 ### Booking instruction
 Customer should remember their [Payment Key].
 It's the key for customer payment, and is your room key when you want to access in yor room.
