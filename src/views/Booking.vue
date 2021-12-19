@@ -1,13 +1,17 @@
 <template>
   <div class="main-container">
     <div class="portfolio">
-
       <!-- TODO v-for photo collection -->
       <div class="flex-container">
         <div class="image-container" v-for="image in images" :key="image">
-          <div class="image-container-inside" @click="goBookingDetailPage(image.roomSeq)">
-            <span>{{ image.roomDesc }}<br>Price: {{ image.roomPrice }} xNav</span>
-            <img :src="image.roomUrl" :alt="image.roomAlt"  />
+          <div
+            class="image-container-inside"
+            @click="goBookingDetailPage(image.roomSeq)"
+          >
+            <span
+              >{{ image.roomDesc }}<br />Price: {{ image.roomPrice }} xNav</span
+            >
+            <img :src="image.roomUrl" :alt="image.roomAlt" />
           </div>
         </div>
       </div>
@@ -20,7 +24,7 @@
 import { defineComponent, ref, getCurrentInstance } from "vue";
 import Footer from "@/components/Footer.vue";
 import router from "@/router/index.ts";
-import axios from "axios"
+import axios from "axios";
 
 export default defineComponent({
   components: {
@@ -28,22 +32,28 @@ export default defineComponent({
   },
   setup() {
     const images = ref();
-    axios
-      .post('http://localhost:8081/getRoomInfo')
-      .then(function (response) {
-        console.log(response.data);
-        images.value=response.data
-      })
-      .catch(function (error) {
-        console.log(error);
-    });
+    const internalInstance = getCurrentInstance();
+
+    if (internalInstance != null) {
+      axios
+        .post(
+          internalInstance.appContext.config.globalProperties.$postUrl +
+            "/getRoomInfo"
+        )
+        .then(function (response) {
+          console.log(response.data);
+          images.value = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
 
     const goBookingDetailPage = (roomSeq: string) => {
       console.log(roomSeq);
-      router.push({ name: 'BookingDetail', params: { roomId: roomSeq }});
+      router.push({ name: "BookingDetail", params: { roomId: roomSeq } });
     };
 
-    const internalInstance = getCurrentInstance();
     const loader =
       internalInstance != null
         ? internalInstance.appContext.config.globalProperties.$loading.show({})

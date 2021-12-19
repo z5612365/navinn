@@ -49,45 +49,51 @@ export default defineComponent({
 
     var paymentHistoryList = ref();
     const refreshPaymentHistory = () => {
-      axios
-        .post("http://localhost:8081/getPaymentHistory")
-        .then(function (response) {
-          paymentHistoryList.value = response.data;
+      if (internalInstance != null) {
+        axios
+          .post(
+            internalInstance.appContext.config.globalProperties.$postUrl +
+              "/getPaymentHistory"
+          )
+          .then(function (response) {
+            paymentHistoryList.value = response.data;
 
-          if (internalInstance != null) {
-            const history = getHistory(
-              internalInstance.appContext.config.globalProperties.$wallet
-            )
-              .then((success) => {
-                const historyJson = JSON.parse(success);
+            if (internalInstance != null) {
+              const history = getHistory(
+                internalInstance.appContext.config.globalProperties.$wallet
+              )
+                .then((success) => {
+                  const historyJson = JSON.parse(success);
 
-                for (const index in paymentHistoryList.value) {
-                  getCumulativePaymentAmountByPaymentKey(
-                    internalInstance.appContext.config.globalProperties.$wallet,
-                    historyJson,
-                    paymentHistoryList.value[index].paymentKey
-                  )
-                    .then((success) => {
-                      if (
-                        paymentHistoryList.value[index].status === "UNPAID" &&
-                        success >= paymentHistoryList.value[index].totalAmount
-                      ) {
-                        paymentHistoryList.value[index].status = "PAID";
-                      }
-                    })
-                    .catch((fail) => {
-                      console.log(fail);
-                    });
-                }
-              })
-              .catch((fail) => {
-                console.log(fail);
-              });
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+                  for (const index in paymentHistoryList.value) {
+                    getCumulativePaymentAmountByPaymentKey(
+                      internalInstance.appContext.config.globalProperties
+                        .$wallet,
+                      historyJson,
+                      paymentHistoryList.value[index].paymentKey
+                    )
+                      .then((success) => {
+                        if (
+                          paymentHistoryList.value[index].status === "UNPAID" &&
+                          success >= paymentHistoryList.value[index].totalAmount
+                        ) {
+                          paymentHistoryList.value[index].status = "PAID";
+                        }
+                      })
+                      .catch((fail) => {
+                        console.log(fail);
+                      });
+                  }
+                })
+                .catch((fail) => {
+                  console.log(fail);
+                });
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     };
 
     return { paymentHistoryList, refreshPaymentHistory };

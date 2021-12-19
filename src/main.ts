@@ -9,7 +9,12 @@ import ElementPlus from "element-plus";
 import "element-plus/dist/index.css";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faSearch, faEyeSlash, faEye, faSync } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faEyeSlash,
+  faEye,
+  faSync,
+} from "@fortawesome/free-solid-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueLoading from "vue-loading-overlay";
@@ -53,6 +58,7 @@ router.beforeEach((to, from, next) => {
 });
 
 import { loadWallet, getBalance } from "@/utils/checkStatus";
+import { provide } from "vue";
 
 library.add(faSearch, faEyeSlash, faEye, faFacebook, faSync);
 
@@ -105,4 +111,11 @@ njs.wallet.Init().then(async () => {
   //getBalance(wallet);
   app.config.globalProperties.$wallet = wallet;
 });
+app.config.globalProperties.$postUrl =
+  window.location.protocol + "//" + window.location.hostname + ":8081";
+console.log(
+  "app.config.globalProperties.$serverUrl " +
+    app.config.globalProperties.$postUrl
+);
+
 app.mount("#app");

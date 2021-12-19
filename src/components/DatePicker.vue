@@ -17,7 +17,15 @@
 </template>
 
 <script>
-import { defineComponent, reactive, ref, watch, toRef } from "vue";
+import {
+  defineComponent,
+  reactive,
+  ref,
+  watch,
+  toRef,
+  inject,
+  getCurrentInstance,
+} from "vue";
 import axios from "axios";
 
 export default defineComponent({
@@ -25,9 +33,10 @@ export default defineComponent({
     roomSeq: String,
   },
   setup(props, { emit }) {
+    const internalInstance = getCurrentInstance();
     const roomSeq = toRef(props, "roomSeq");
 
-      console.log("roomSeq: "+roomSeq.value);
+    console.log("roomSeq: " + roomSeq.value);
 
     const dates = ref(new Date());
     var disabledDateList = ref();
@@ -56,19 +65,35 @@ export default defineComponent({
     };
 
     const refreshBookedDate = () => {
-      axios
-        .post("http://localhost:8081/getBookedDate?roomSeq=" + roomSeq.value)
-        .then(function (response) {
-          disabledDateList.value = response.data;
-          console.log("http://localhost:8081/getBookedDate?roomSeq=" + roomSeq.value);
-          console.log("disabledDateList.value "+disabledDateList.value);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      if (internalInstance != null) {
+        axios
+          .post(
+            internalInstance.appContext.config.globalProperties.$postUrl +
+              "/getBookedDate?roomSeq=" +
+              roomSeq.value
+          )
+          .then(function (response) {
+            disabledDateList.value = response.data;
+            console.log(
+              internalInstance.appContext.config.globalProperties.$postUrl +
+                "/getBookedDate?roomSeq=" +
+                roomSeq.value
+            );
+            console.log("disabledDateList.value " + disabledDateList.value);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
     };
 
-    return { dates, emitOutside, disabledDate, refreshBookedDate, disabledDateList };
+    return {
+      dates,
+      emitOutside,
+      disabledDate,
+      refreshBookedDate,
+      disabledDateList,
+    };
   },
 });
 </script>

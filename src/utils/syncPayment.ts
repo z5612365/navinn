@@ -41,15 +41,17 @@ export async function syncPaymentStatus(
   history: any,
   paymentKey: string,
   totalAmount: number,
-  status: string
+  status: string,
+  postUrl: string
 ) {
   console.log("======= syncPayment ===============");
   getCumulativePaymentAmountByPaymentKey(wallet, history, paymentKey)
     .then((success) => {
       if (status === "UNPAID" && success > totalAmount) {
         //UPDATE
+
         axios
-          .post("http://localhost:8081/updatePaymentStatusToPaid?" + paymentKey)
+          .post(postUrl + "/updatePaymentStatusToPaid?" + paymentKey)
           .then(function (response) {
             console.log(response.data);
           })
@@ -65,7 +67,7 @@ export async function syncPaymentStatus(
 /*
 export function refreshPaymentHistory(wallet: any) {
   axios
-    .post("http://localhost:8081/getPaymentHistory")
+    .post(internalInstance.appContext.config.globalProperties.$postUrl+"/getPaymentHistory")
     .then(function (response) {
       const paymentHistoryList = response.data;
 
