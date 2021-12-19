@@ -9,19 +9,19 @@ Customer should remember their [Payment Key].
 It's the key for customer payment, and is your room key when you want to access in yor room.
 
 Instruction:
-    BOOK:
-        1. [navinn > Booking page]: Booking it! (Book date will not avialable to pick if another booked earlier)
-        2. [navinn > Booking page]: Remember your [Payment Key]
-        3. [navinn > Search page]: Search with [Payment Key] for payment details
-        4. [navinn > Search page]: Check all booking info is correct, the booking status would be "UNPAID"
-        5. [navinn > History page]: (Optional)Press refresh button, get hotel's all booking info
+* BOOK:
+    1. [navinn > Booking page]: Booking it! (Book date will not avialable to pick if another booked earlier)
+    2. [navinn > Booking page]: Remember your [Payment Key]
+    3. [navinn > Search page]: Search with [Payment Key] for payment details
+    4. [navinn > Search page]: Check all booking info is correct, the booking status would be "UNPAID"
+    5. [navinn > History page]: (Optional)Press refresh button, get hotel's all booking info
 
-    PAY:
-        1. [navinn-wallet(just for test)/or your personal xNav wallet that can create txn with memo]
-        2. [navinn-wallet(just for test)]: Input paymentKey xNavAmount
-            [navinn-wallet > paymentKey]: [navinn > Search page > Total Amount]
-            [navinn-wallet > xNavAmount]: [[navinn > Search page > Receive Wallet])
-        3. [navinn > Search page]: Back to Search page or History page
+* PAY:
+    1. [navinn-wallet(just for test)/or your personal xNav wallet that can create txn with memo]
+    2. [navinn-wallet(just for test)]: Input paymentKey xNavAmount
+        [navinn-wallet > paymentKey]: [navinn > Search page > Total Amount]
+        [navinn-wallet > xNavAmount]: [[navinn > Search page > Receive Wallet])
+    3. [navinn > Search page]: Back to Search page or History page
             , and search again, booking status would be "PAID"
 
 ## Related project:
