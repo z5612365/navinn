@@ -28,10 +28,9 @@ Instruction:
 
 ## Related project:
 * [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend): Hotel Property Management System (backend)
-* [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend): Hotel Property Management System (frontend), and it embeds a wallet([navinn-wallet](https://github.com/z5612365/navinn-wallet)) for receiving xNav
-<!---
-* [navinn-wallet](https://github.com/z5612365/navinn-wallet): Simple wallet for send xNav
--->
+* [navinn-pms-frontend](https://github.com/z5612365/navinn-pms-frontend): Hotel Property Management System (frontend), and it embeds a wallet for receiving xNav
+* [navinn-wallet](https://github.com/z5612365/navinn-wallet): Simple wallet for customer to send xNav
+
 
 ## Install
 * Git clone [navinn](https://github.com/z5612365/navinn)
@@ -59,7 +58,7 @@ Instruction:
 
 * Short-term goal:
   * [navinn](https://github.com/z5612365/navinn): Entry point for customer booking.
-  * [navinn-wallet](https://github.com/z5612365/navinn-wallet): Hardcode in [navinn](https://github.com/z5612365/navinn) currently
+  * [navinn-wallet](https://github.com/z5612365/navinn-wallet): Hardcode wallet info currently
   * [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend): Api for fetching txn, room and booking data
   * Database(MariaDB): Store txn, room and booking data
 * Long-term goal:
