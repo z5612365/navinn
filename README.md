@@ -4,6 +4,10 @@ This project is for navcoin hackathon 2021, and developing with [navcoin-js](htt
 Navinn is a website for online booking, which is safe, anonymous and untraceable.
 
 ## Demo
+    Maybe take a while to load, because TypeScript in node_module size is too big(around 50M).
+    For now it's just for demo, so I only npm run it.
+    If you use webpack you can speed it up.
+    
     Navinn: http://139.162.98.187:8080/
     Navinn-Wallet: https://139.162.98.187:8082/
 ### Booking instruction
