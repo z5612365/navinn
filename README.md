@@ -52,6 +52,8 @@ Instruction:
 * Run [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend)
 
         Run Spring with Maven
+        mvn clean
+        mvn spring-boot:run
         
 ## Goals to achieve
 
