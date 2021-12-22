@@ -50,8 +50,7 @@ Instruction:
 * Change [navinn-pms-backend DB setting](https://github.com/z5612365/navinn-pms-backend/blob/master/navinn-ap/navinn-ap-customer-gl/src/main/resources/application.properties)
 * Create dataBase schema and insert initial data(DDL and initial data is in [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend) db folder)
 * Run [navinn-pms-backend](https://github.com/z5612365/navinn-pms-backend)
-
-        Run Spring with Maven
+        
         mvn clean
         mvn spring-boot:run
         
